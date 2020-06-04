@@ -2,11 +2,11 @@ public class Thread {
     private String description = "Поток ";
     private int quantTime;
     private int quant;
+    private int currentTime;
     public Thread(int threadNumb, int quantTime, int quant) {
         this.description += (threadNumb+1);
         this.quantTime = quantTime;
-        this.quant = quant;
-
+        this.currentTime = quant;
     }
 
     public int getQuantTime() {
@@ -23,5 +23,14 @@ public class Thread {
     public int decreaseTime() {
         --quantTime;
         return quantTime;
+    }
+    public int getCurrentTimeTh() {
+        return currentTime;
+    }
+    public void decreaseCurrentTimeTh() {
+        --currentTime;
+    }
+    public void restoreCurrentQuantTimeTh() {
+        currentTime = quant;
     }
 }
