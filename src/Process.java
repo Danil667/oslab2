@@ -7,15 +7,16 @@ public class Process {
     private String description = "Процесс  ";
     private int quantTime;
     private int currentTime;
-
+    private int count;
     public Process(int procNumb, int quantTime) {
         this.quantTime = quantTime;
         this.currentTime = quantTime;
         this.description += (procNumb+1);
-
         threads = new ArrayList<Thread>();
+        count = 0;
         for (int i = 0; i < rand.nextInt(5)+1; i++) {
-            threads.add(new Thread(i, rand.nextInt(10)+1));
+            threads.add(new Thread(i, rand.nextInt(10)+1, 2));
+            count++;
         }
     }
 
@@ -24,10 +25,15 @@ public class Process {
             return true;
         return false;
     }
-
-    public Thread getThread() {
+    public int getCount() {
+        return count;
+    }
+    public void setCount() {
+        count -=1;
+    }
+    public Thread getThread(int i) {
         if (threads.size() == 0) return null;
-        return threads.get(0);
+        return threads.get(i);
     }
 
     public int getCurrentTime() {
@@ -42,8 +48,9 @@ public class Process {
         --currentTime;
     }
 
-    public void deleteThread() {
-        threads.remove(0);
+    public void deleteThread(int i) {
+        threads.remove(i);
+        count--;
     }
 
     public String getDescription() {
