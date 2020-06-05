@@ -28,6 +28,9 @@ public class Process {
     public int getCount() {
         return count;
     }
+    public void setCount() {
+        count -=1;
+    }
     public Thread getThread(int i) {
         if (threads.size() == 0) return null;
         return threads.get(i);
@@ -54,6 +57,10 @@ public class Process {
         return description;
     }
 
+    public void restoreCurrentQuantTime() {
+        currentTime = quantTime;
+    }
+
     public String getThreadsDescription() {
         String str = "";
         str += description + " QuantTime = " + quantTime + "\n";
@@ -61,30 +68,5 @@ public class Process {
             str += "   " + thread.getDescription() + " QuantTime:" + thread.getQuantTime() + "\n";
         }
         return str;
-    }
-    public void run(int indTh)
-    {
-        System.out.println(getThread(indTh).getDescription() + " quant = " + getThread(indTh).getQuantTime());
-        if (getThread(indTh).getQuantTime() >= 0)
-        {
-            getThread(indTh).decreaseTime();
-            decreaseCurrentTime();
-
-            if (getThread(indTh).getQuantTime() == 0)
-            {
-                System.out.println(getThread(indTh).getDescription() + " завершил свою работу");
-                deleteThread(indTh);
-            }
-        }
-    }
-
-    public boolean restore(int i)
-    {
-        if (getCurrentTime() == 0 && getThread(i).getQuantTime() > 0)
-        {
-            currentTime = quantTime;
-            return true;
-        }
-        return false;
     }
 }
