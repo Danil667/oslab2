@@ -5,12 +5,8 @@ public class Process {
     Random rand = new Random();
     private ArrayList<Thread> threads;
     private String description = "Процесс  ";
-    private int quantTime;
-    private int currentTime;
     private int count;
-    public Process(int procNumb, int quantTime) {
-        this.quantTime = quantTime;
-        this.currentTime = quantTime;
+    public Process(int procNumb) {
         this.description += (procNumb+1);
         threads = new ArrayList<Thread>();
         count = 0;
@@ -29,25 +25,12 @@ public class Process {
         return count;
     }
     public void setCount() {
-        count -=1;
+        count--;
     }
     public Thread getThread(int i) {
         if (threads.size() == 0) return null;
         return threads.get(i);
     }
-
-    public int getCurrentTime() {
-        return currentTime;
-    }
-
-    public int getQuantTime() {
-        return quantTime;
-    }
-
-    public void decreaseCurrentTime() {
-        --currentTime;
-    }
-
     public void deleteThread(int i) {
         threads.remove(i);
         count--;
@@ -57,13 +40,9 @@ public class Process {
         return description;
     }
 
-    public void restoreCurrentQuantTime() {
-        currentTime = quantTime;
-    }
-
     public String getThreadsDescription() {
         String str = "";
-        str += description + " QuantTime = " + quantTime + "\n";
+        str += description + "\n";
         for(var thread : threads) {
             str += "   " + thread.getDescription() + " QuantTime:" + thread.getQuantTime() + "\n";
         }
