@@ -15,7 +15,7 @@ public class Process {
         threads = new ArrayList<Thread>();
         count = 0;
         for (int i = 0; i < rand.nextInt(5)+1; i++) {
-            threads.add(new Thread(i, rand.nextInt(10)+1, 4));
+            threads.add(new Thread(i, rand.nextInt(10)+1, 2));
             count++;
         }
     }
@@ -32,9 +32,22 @@ public class Process {
         count -=1;
     }
     public Thread getThread(int i) {
-        if (threads.size() == 0 || i >= threads.size()) return null;
+        if (threads.size() == 0) return null;
         return threads.get(i);
     }
+
+    public int getCurrentTime() {
+        return currentTime;
+    }
+
+    public int getQuantTime() {
+        return quantTime;
+    }
+
+    public void decreaseCurrentTime() {
+        --currentTime;
+    }
+
     public void deleteThread(int i) {
         threads.remove(i);
         count--;
@@ -43,6 +56,11 @@ public class Process {
     public String getDescription() {
         return description;
     }
+
+    public void restoreCurrentQuantTime() {
+        currentTime = quantTime;
+    }
+
     public String getThreadsDescription() {
         String str = "";
         str += description + " QuantTime = " + quantTime + "\n";
